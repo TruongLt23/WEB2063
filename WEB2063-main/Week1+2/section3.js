@@ -1,49 +1,39 @@
-// === SECTION 3 – Functions & Strings ===
+// Bài 8: Làm việc với String
+const message = '  Welcome to JavaScript course!  ';
+console.log(message.trim());         
+console.log(message.toUpperCase());  
+console.log(message.includes('JavaScript')); // true
 
-// ✅ Working with Strings
-console.log('--- String Methods ---');
-const lang = 'JavaScript';
-console.log(lang.toUpperCase());
-console.log(lang.includes('Script'));
-console.log(lang.slice(0, 4));
-
-// ✅ Default Parameters
-console.log('--- Default Parameters ---');
+// Bài 9: Default Parameters
 function greet(name = 'Guest') {
-  console.log(`Hello, ${name}`);
+  console.log(`Hello ${name}`);
 }
-greet();
-greet('Anna');
+greet();         
+greet('Phát');     
 
-// ✅ Value vs Reference
-console.log('--- Value vs Reference ---');
-let val1 = 100;
-let val2 = val1;
-val2 = 200;
-console.log(val1); // primitive
+// Bài 10: Value vs Reference
+let x = 5;
+let y = x;
+y++;
+console.log('x:', x); // 5
+console.log('y:', y); // 6
+let obj1 = { value: 10 };
+let obj2 = obj1;
+obj2.value = 100;
+console.log('obj1:', obj1.value); // 100
+console.log('obj2:', obj2.value); // 100
 
-const objA = { score: 90 };
-const objB = objA;
-objB.score = 100;
-console.log(objA.score); // reference
-
-// ✅ Higher-Order Functions
-console.log('--- Higher-Order Functions ---');
-function double(n) {
-  return n * 2;
+// Bài 11: Higher-Order Functions
+function calculator(operation) {
+  if (operation === 'add') {
+    return (a, b) => a + b;
+  } else if (operation === 'multiply') {
+    return (a, b) => a * b;
+  } else {
+    return () => 'Invalid';
+  }
 }
-function operate(fn, val) {
-  return fn(val);
-}
-console.log(operate(double, 5));
-
-// HOFs: map, filter, reduce
-const nums = [1, 2, 3, 4];
-const doubled = nums.map(n => n * 2);
-console.log(doubled);
-
-const evens = nums.filter(n => n % 2 === 0);
-console.log(evens);
-
-const total = nums.reduce((acc, cur) => acc + cur, 0);
-console.log(total);
+const add = calculator('add');
+const multiply = calculator('multiply');
+console.log(add(2, 3));       // 5
+console.log(multiply(2, 3));  // 6

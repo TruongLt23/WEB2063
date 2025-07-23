@@ -1,76 +1,77 @@
-// === SECTION 2 – Data Structures & Modern Operators ===
+// Bài 1: Modern JavaScript Operators & Objects
 
-// ✅ Destructuring Array
-console.log('--- Destructuring Array ---');
-const numbers = [10, 20, 30];
-const [first, second, third] = numbers;
-console.log(first, second, third);
+// Bài 1: Destructuring Array
+const numbers = [10, 20, 30, 40, 50];
+const [first, , third, ...rest] = numbers;
+console.log('first:', first);   // 10
+console.log('third:', third);   // 30
+console.log('rest:', rest);     // [40, 50]
 
-// ✅ Spread Operator
-console.log('--- Spread Operator ---');
-const moreNumbers = [...numbers, 40, 50];
-console.log(moreNumbers);
+// Bài 2: Spread và Rest
+const arr1 = [1, 2];
+const arr2 = [3, 4];
+const combined = [...arr1, ...arr2];
+console.log('combined:', combined); // [1, 2, 3, 4]
 
-// ✅ Rest Pattern & Parameters
-console.log('--- Rest Pattern ---');
-const [a, b, ...others] = [1, 2, 3, 4, 5];
-console.log(a, b, others);
-
-function sum(...args) {
-  return args.reduce((acc, val) => acc + val, 0);
+function sumAll(...numbers) {
+  return numbers.reduce((a, b) => a + b, 0);
 }
-console.log(sum(1, 2, 3, 4));
+console.log(sumAll(1, 2, 3, 4)); // 10
 
-// ✅ Short Circuiting
-console.log('--- Short Circuiting ---');
-console.log(0 || 'Fallback');
-console.log(1 && 'Continue');
+// Bài 3: Short Circuiting và Nullish
+let points = 0;
+let userName = '';
+const displayPoints = points || 'No points';
+const displayName = userName ?? 'Guest';
+console.log(displayPoints); // 'No points'
+console.log(displayName);   // ''
 
-// ✅ Nullish Coalescing Operator
-console.log('--- Nullish Coalescing ---');
-const age = 0;
-console.log(age ?? 18);
+// Bài 4: Logical Assignment
+let a = 0;
+let b = 'Hello';
+let c;
+a ||= 'Fallback';
+b &&= 'Updated';
+c ??= 'Default';
+console.log('a:', a); // 'Fallback'
+console.log('b:', b); // 'Updated'
+console.log('c:', c); // 'Default'
 
-// ✅ Logical Assignment Operators
-console.log('--- Logical Assignment Operators ---');
-let user1 = { name: 'Alice', age: null };
-user1.age ??= 25;
-console.log(user1);
-
-// ✅ Optional Chaining
-console.log('--- Optional Chaining ---');
-const user = { profile: { username: 'john' } };
-console.log(user.profile?.username);
-console.log(user.contact?.phone);
-
-// ✅ Object Destructuring
-console.log('--- Object Destructuring ---');
-const person = { name: 'Bob', job: 'Dev' };
-const { name, job } = person;
-console.log(name, job);
-
-// ✅ Enhanced Object Literals
-console.log('--- Enhanced Object Literals ---');
-const x = 10;
-const y = 20;
-const point = {
-  x,
-  y,
-  print() {
-    console.log(`Point: (${x}, ${y})`);
-  },
+// Bài 5: Optional Chaining
+const user = {
+  name: 'Dat',
+  contact: {
+    email: 'dat@gmail.com'
+  }
 };
-point.print();
+console.log(user.contact?.email);  // 'dat@gmail.com'
+console.log(user.profile?.age);    // undefined
 
-// ✅ Looping Object
-console.log('--- Looping Object ---');
-const settings = { theme: 'dark', font: 'Arial' };
-for (const key of Object.keys(settings)) {
-  console.log('Key:', key);
-}
-for (const val of Object.values(settings)) {
-  console.log('Value:', val);
-}
-for (const [k, v] of Object.entries(settings)) {
-  console.log(`${k}: ${v}`);
+// Bài 6: Object Destructuring
+const student = {
+  name: 'Linh',
+  age: 21,
+  scores: {
+    math: 9,
+    english: 8
+  }
+};
+const { name, scores: { math: diemToan, english: diemAnh } } = student;
+console.log(name);       // Linh
+console.log(diemToan);   // 9
+console.log(diemAnh);    // 8
+
+// Bài 7: Looping Object
+const salaries = {
+  John: 1000,
+  Jane: 1500,
+  Jim: 1200
+};
+const keys = Object.keys(salaries);
+const values = Object.values(salaries);
+const entries = Object.entries(salaries);
+console.log('Keys:', keys);       // ['John', 'Jane', 'Jim']
+console.log('Total:', values.reduce((sum, val) => sum + val, 0)); // 3700
+for (const [name, salary] of entries) {
+  console.log(`${name}: $${salary}`);
 }
