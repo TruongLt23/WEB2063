@@ -1,91 +1,132 @@
-// ✅ 1. Map và Set
+// // Foreach
+// const menuItems = [
+//   { path: "/", label: "Trang chủ" },
+//   { path: "/products", label: "Sản phẩm" },
+// ];
 
-// Map: lưu key-value (key có thể là bất kỳ kiểu dữ liệu nào)
-const myMap = new Map();
-myMap.set('name', 'Trường');
-myMap.set('age', 21);
-console.log('Map:', myMap.get('name')); // Kết quả: Trường
+// let rendered = [];
 
-// Set: lưu giá trị duy nhất, không trùng lặp
-const mySet = new Set([1, 2, 2, 3, 4]);
-mySet.add(5); // Thêm phần tử
-console.log('Set:', [...mySet]); // Kết quả: [1, 2, 3, 4, 5]
+// menuItems.forEach((item) => {
+//   rendered.push(`Path: ${item.path} - Label: ${item.label}`);
+// });
 
+// console.log(menuItems);
+// console.log(rendered);
 
-// ✅ 2. forEach – Duyệt mảng
-const fruits = ['apple', 'banana', 'mango'];
-fruits.forEach((fruit, i) => {
-  console.log(`${i + 1}. ${fruit}`);
-});
-// Kết quả:
-// 1. apple
-// 2. banana
-// 3. mango
+// // Map
+// let renderedMap = menuItems.map(
+//   (item) => `Path: ${item.path} - Label: ${item.label}`
+// );
 
+// console.log("renderedMap", renderedMap);
 
-// ✅ 3. map – Tạo mảng mới
-const nums1 = [1, 2, 3];
-const doubled = nums1.map(n => n * 2);
-console.log('map:', doubled); // Kết quả: [2, 4, 6]
+//find() – trả về phần tử đầu tiên thỏa điều kiện.
+// const products = [
+//   { id: 1, name: "Product A", udemy: 100 },
+//   { id: 2, name: "Product B", udemy: 100 },
+//   { id: 3, name: "Product C", udemy: 0 },
+// ];
+// const foundProduct = products.find((product) => product.udemy === 100);
+// const filterProduct = products.filter((product) => product.udemy === 100);
 
+// console.log(foundProduct);
+// console.log("filterProduct", filterProduct);
+// Duc anh : id 1 va 2
+// id : 1
 
-// ✅ 4. filter – Lọc mảng
-const nums2 = [1, 2, 3, 4, 5];
-const oddNums = nums2.filter(n => n % 2 !== 0);
-console.log('filter:', oddNums); // Kết quả: [1, 3, 5]
+const arr = [1, [2, [3, 4]]]; // [1,2,3,4]
 
+// console.log(arr.flat(1)); //[ 1, 2, [ 3, 4 ] ]
+// console.log(arr.flat(2)); //
 
-// ✅ 5. reduce – Tính tổng
-const nums3 = [1, 2, 3, 4];
-const total = nums3.reduce((acc, cur) => acc + cur, 0);
-console.log('reduce:', total); // Kết quả: 10
-
-
-// ✅ 6. Magic of Chaining – Kết hợp nhiều hàm
-const numbers = [1, 2, 3, 4, 5];
-const result = numbers
-  .filter(n => n % 2 !== 0)  // [1, 3, 5]
-  .map(n => n * 2)           // [2, 6, 10]
-  .reduce((a, b) => a + b);  // 18
-console.log('Magic of Chaining:', result);
-
-
-// ✅ 7. find – Tìm phần tử đầu tiên
-const students = [
-  { name: 'Luyến', score: 9 },
-  { name: 'Minh', score: 7 },
+const menuItems = [
+  { path: "/", label: "Trang chủ" }, // depth 0
+  { path: "/products", label: "Sản phẩm" },
+  {
+    label: "Quản lý",
+    children: [
+      { path: "/orders", label: "Đơn hàng" }, // depth 1
+      { path: "/customers", label: "Khách hàng" },
+    ],
+  },
+  { path: "/settings", label: "Cài đặt" },
 ];
-const foundStudent = students.find(s => s.name === 'Luyến');
-console.log('find:', foundStudent); 
-// Kết quả: { name: 'Luyến', score: 9 }
 
+// flatMap
+// const flatMenuItems = menuItems.flatMap((item) => {
+//   console.log(item.children ? item.children : [item]);
+//   return item.children ? item.children : [item];
+// });
 
-// ✅ 8. findIndex – Tìm vị trí phần tử
-const items = ['a', 'b', 'c'];
-const index = items.findIndex(i => i === 'b');
-console.log('findIndex:', index); // Kết quả: 1
+// console.log(flatMenuItems);
+// item 1  { path: '/', label: 'Trang chủ' }, // [ { path: '/', label: 'Trang chủ' },]
+// item 3  { children: [] }, // []
+// map : [
+//     { path: '/', label: 'Trang chủ' },
+//     { path: '/products', label: 'Sản phẩm' },
+//      { path: '/orders', label: 'Đơn hàng' },
+//   { path: '/customers', label: 'Khách hàng' }
 
+// ]
+// ] => flat(1)
 
-// ✅ 9. some – Có ít nhất một phần tử đúng điều kiện
-const marks = [3, 6, 8];
-const hasFail = marks.some(m => m < 5);
-console.log('some:', hasFail); // Kết quả: true
+var courses = [
+  {
+    id: 1,
+    name: "Javascript",
+    coin: 100,
+  },
+  {
+    id: 2,
+    name: "HTML,CSS",
+    coin: 200,
+  },
+  {
+    id: 3,
+    name: "Le Phuc Lam",
+    coin: 300,
+  },
+  {
+    id: 4,
+    name: "Le Phuc Lam",
+    coin: 400,
+  },
+  {
+    id: 5,
+    name: "Le Phuc Lam",
+    coin: 500,
+  },
+  {
+    id: 6,
+    name: "Le Phuc Lam",
+    coin: 600,
+  },
+];
 
+let total = 0;
+courses.forEach((item) => {
+  total = total + item.coin;
+});
 
-// ✅ 10. every – Tất cả phần tử đúng điều kiện
-const marks2 = [6, 7, 8];
-const allPassed = marks2.every(m => m >= 5);
-console.log('every:', allPassed); // Kết quả: true
+// console.log(total);
 
+const totalCoin = courses.reduce(function (accmulator, currentValue, idx) {
+  console.log(
+    `step ${idx + 1}`,
+    accmulator,
+    currentValue.coin,
+    accmulator + currentValue.coin
+  );
+  return accmulator + currentValue.coin;
+}, 0);
 
-// ✅ 11. flat – Làm phẳng mảng
-const nested = [1, 2, [3, 4, [5, 6]]];
-console.log('flat (1 cấp):', nested.flat(1)); // Kết quả: [1, 2, 3, 4, [5, 6]]
-console.log('flat (2 cấp):', nested.flat(2)); // Kết quả: [1, 2, 3, 4, 5, 6]
+// console.log(totalCoin); // 2100
 
+const numbers = [1, 2, 3, 4, 5];
 
-// ✅ 12. flatMap – map() + flat()
-const sentences = ['hello world', 'good night'];
-const words = sentences.flatMap(s => s.split(' '));
-console.log('flatMap:', words); 
-// Kết quả: ['hello', 'world', 'good', 'night']
+const result = numbers
+  .filter((n) => n % 2 === 0) // [2, 4]
+  .map((n) => n * 10) // [20, 40]
+  .reduce((a, b) => a + b, 0); // 60
+
+console.log(result); //60
