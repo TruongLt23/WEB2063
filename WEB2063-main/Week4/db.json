@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "title": "iPhone 15",
+      "name": "Apple",
+      "price": 2500,
+      "image": "https://tse4.mm.bing.net/th/id/OIP.5tfZWySz0Z41PzCoMcwIkwHaD1?pid=Api&P=0&h=180",
+      "id": "1"
+    },
+    {
+      "id": "cf5c",
+      "title": "Iphone 16",
+      "name": "Apple",
+      "price": 3000,
+      "image": "https://files.tecnoblog.net/wp-content/uploads/2024/09/iphone-16-cores-edited-768x432.png"
+    }
+  ]
+}
